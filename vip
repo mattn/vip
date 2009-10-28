@@ -32,7 +32,7 @@ unless (my $pid = fork) {
     # child process
     open STDOUT, '>&', STDERR
         or die "failed to reopen stderr:$!";
-    system('vi', $fn) == 0
+    system($ENV{VIP_VI} || 'vi', $fn) == 0 # shall we vim?
         or die "vi exited with non-zero return code:$?";
     exit 0;
 }
